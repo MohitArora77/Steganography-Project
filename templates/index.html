@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Steganography</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <!-- Background Video -->
+    <video class="video-background" autoplay loop muted>
+        <source src="{% static 'video/video2.mp4' %}" type="video/mp4" />
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="container">
+        <h2>IMAGE STEGANOGRAPHY</h2>
+
+        <!-- Alert Messages -->
+        <!-- {% if messages %}
+        <div class="alert">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %} -->
+
+        <!-- Form -->
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="image">Upload Image</label>
+            <input type="file" name="image" required>
+
+            <label for="message">Secret Message</label>
+            <textarea class="text" name="message" rows="4" placeholder="Enter your hidden message"></textarea>
+
+            <button type="submit" name="encode" class="btn btn-primary">Encode & Upload</button>
+            <button type="submit" name="decode" class="btn btn-success">Decode Message</button>
+        </form>
+
+        <!-- Decoded Message Display -->
+        {% if decoded_message %}
+        <div class="alert alert-info">
+            <strong>Decoded Message:</strong> {{ decoded_message }}
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
